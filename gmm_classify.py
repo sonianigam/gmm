@@ -47,8 +47,30 @@ def gmm_classify(X, mu1, sigmasq1, wt1, mu2, sigmasq2, wt2, p1):
         - class_pred  : a numpy array containing results from the gmm classifier
                         (the results array should be in the same order as the input data points)
     """
+    N = len(X)
+    class_pred = np.zeros(N)
+    k1 = len(mu1)
+    k2 = len(mu2)
 
-    # YOUR CODE FOR PROBLEM 3 HERE
+    for i in xrange(N):
+        prob_one = p1
+        prob_two = 1.0-p1
+
+        for x_1 in range(k1):
+            value = wt1[x_1] * scipy.stats.norm(mu1[x_1], np.sqrt(sigmasq1[x_1])).pdf(X[i])
+            if value > prob_one:
+                prob_one = value
+
+        for x_2 in range(k2):
+            value = wt2[x_2] * scipy.stats.norm(mu2[x_2], np.sqrt(sigmasq2[x_2])).pdf(X[x_2])
+            if value > prob_one:
+                prob_one = value        
+
+
+        if prob_one >= prob_two:
+            class_pred[i] = 1
+        else:
+            class_pred[i] = 2
 
     return class_pred
 
