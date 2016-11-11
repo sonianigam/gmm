@@ -72,7 +72,7 @@ def main():
     for i in xrange(20):
         X_plot.append(i)
 
-    plt.plot(X_plot, L1, "ro")
+    plt.plot(X_plot, L1)
     plt.ylabel('Log-Likelihood Values')
     plt.xlabel('Iteration Number')
     plt.axis([0, 20, min(L1)-1, max(L1)+1])
@@ -81,7 +81,7 @@ def main():
 
     plt.clf()
 
-    plt.plot(X_plot, L2, "ro")
+    plt.plot(X_plot, L2)
     plt.ylabel('Log-Likelihood Values')
     plt.xlabel('Iteration Number')
     plt.axis([0, 20, min(L2)-1, max(L2)+1])
